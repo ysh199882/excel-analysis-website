@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 import ExcelUploader from './components/ExcelUploader';
+import Login from './components/Auth';
+import isLogin from './helpers/islogin';
 
 export default function Home() {
   return (
@@ -18,7 +20,8 @@ export default function Home() {
         />
       </div>
       <div>微信账单GPT分析</div>
-      <ExcelUploader />
+
+      {isLogin() ? <ExcelUploader /> : <Login />}
     </main>
   );
 }
