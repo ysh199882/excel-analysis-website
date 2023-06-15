@@ -1,34 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import * as XLSX from 'xlsx';
-
-interface FilteredRow {
-  交易时间: any;
-  交易对方: any;
-  商品: any;
-  金额元: number | undefined;
-  当前状态: any;
-}
-
-interface ExcelRow {
-  交易时间: string;
-  交易类型: string;
-  交易对方: string;
-  商品: string;
-  收支: string;
-  金额元: number;
-  支付方式: string;
-  当前状态: string;
-  交易单号: string;
-  商户单号: string;
-  备注: string;
-}
-
-const styles = {
-  statusColumn: {
-    width: '200px', // 你可以根据需要调整这个数值
-  },
-};
+import moment from 'moment';
+import { ExcelRow, FilteredRow } from './interface';
+import Styles from './index.module.scss';
 
 const ExcelUploader = () => {
   const [rows, setRows] = useState<ExcelRow[]>([]);
@@ -36,7 +11,6 @@ const ExcelUploader = () => {
   const onDrop = useCallback((acceptedFiles: any[]) => {
     acceptedFiles.forEach((file) => {
       const reader = new FileReader();
-
       reader.onabort = () => console.log('file reading was aborted');
       reader.onerror = () => console.log('file reading has failed');
       reader.onload = () => {
@@ -48,17 +22,16 @@ const ExcelUploader = () => {
             workbook.Sheets[sheetName],
             {
               header: 1,
-              range: 17, // 表示从第16行开始读取
+              range: 17, // 从第16行开始读取
             }
           );
 
           console.log(sheetData, 'sheetData');
 
-          // Filter the data to only keep the fields you need
           const filteredData = sheetData
             .filter((row: any[]) => row.length >= 6)
             .map((row: any[]) => ({
-              交易时间: row[0],
+              交易时间: moment(row[0]).format('YYYY-MM-DD HH:mm:ss'),
               交易对方: row[2],
               商品: row[3],
               金额元:
@@ -99,16 +72,10 @@ const ExcelUploader = () => {
   return (
     <div
       {...getRootProps()}
+      className={Styles.excelUploaderCon}
       style={{
-        border: '2px dashed #aaa',
-        padding: '20px',
-        borderRadius: '5px',
-        color: '#aaa',
-        textAlign: 'center',
-        transition: 'all 0.2s',
         backgroundColor: isDragActive ? '#eee' : '',
         borderColor: isDragActive ? '#888' : '#aaa',
-        marginBottom: '300px',
       }}
     >
       <input {...getInputProps()} />
@@ -116,7 +83,7 @@ const ExcelUploader = () => {
       {rows.length === 0 ? (
         <p>拖拽Excel文件到这里，或点击选择文件</p>
       ) : (
-        <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
+        <div className={Styles.table}>
           <table>
             <thead>
               <tr>
@@ -134,7 +101,7 @@ const ExcelUploader = () => {
                   <td>{row.交易对方}</td>
                   <td>{row.商品}</td>
                   <td>{row.金额元}</td>
-                  <td style={styles.statusColumn}>{row.当前状态}</td>
+                  <td className={Styles.statusColumn}>{row.当前状态}</td>
                 </tr>
               ))}
             </tbody>
