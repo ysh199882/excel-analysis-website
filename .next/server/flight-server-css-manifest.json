@@ -1,20 +1,4 @@
 {
-  "cssImports": {
-    "/Users/yangshihao/Documents/GitHub/excel-analysis-website/src/app/layout.tsx": [
-      "/Users/yangshihao/Documents/GitHub/excel-analysis-website/node_modules/next/font/google/target.css?{\"path\":\"src/app/layout.tsx\",\"import\":\"Inter\",\"arguments\":[{\"subsets\":[\"latin\"]}],\"variableName\":\"inter\"}",
-      "/Users/yangshihao/Documents/GitHub/excel-analysis-website/src/app/globals.css"
-    ],
-    "/Users/yangshihao/Documents/GitHub/excel-analysis-website/src/app/page.tsx": [
-      "/Users/yangshihao/Documents/GitHub/excel-analysis-website/src/app/page.module.css",
-      "/Users/yangshihao/Documents/GitHub/excel-analysis-website/src/app/components/ExcelUploader/index.module.scss"
-    ]
-  },
-  "cssModules": {
-    "/Users/yangshihao/Documents/GitHub/excel-analysis-website/src/app/page": [
-      "/Users/yangshihao/Documents/GitHub/excel-analysis-website/src/app/globals.css",
-      "/Users/yangshihao/Documents/GitHub/excel-analysis-website/node_modules/next/font/google/target.css?{\"path\":\"src/app/layout.tsx\",\"import\":\"Inter\",\"arguments\":[{\"subsets\":[\"latin\"]}],\"variableName\":\"inter\"}",
-      "/Users/yangshihao/Documents/GitHub/excel-analysis-website/src/app/components/ExcelUploader/index.module.scss",
-      "/Users/yangshihao/Documents/GitHub/excel-analysis-website/src/app/page.module.css"
-    ]
-  }
+  "cssImports": {},
+  "cssModules": {}
 }
