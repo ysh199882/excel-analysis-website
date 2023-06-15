@@ -1,9 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import * as XLSX from 'xlsx';
-import moment from 'moment';
-import { ExcelRow, FilteredRow } from './interface';
+import { ExcelRow } from './interface';
 import Styles from './index.module.scss';
+import filterAndTransformSheetData from '@/app/helpers/filterAndTransformSheetData';
 
 const ExcelUploader = () => {
   const [rows, setRows] = useState<ExcelRow[]>([]);
@@ -25,29 +25,9 @@ const ExcelUploader = () => {
               range: 17, // 从第16行开始读取
             }
           );
-
           console.log(sheetData, 'sheetData');
 
-          const filteredData = sheetData
-            .filter((row: any[]) => row.length >= 6)
-            .map((row: any[]) => ({
-              交易时间: moment(row[0]).format('YYYY-MM-DD HH:mm:ss'),
-              交易对方: row[2],
-              商品: row[3],
-              金额元:
-                row[5] !== undefined
-                  ? parseFloat(row[5].replace('¥', ''))
-                  : undefined,
-              当前状态: row[7],
-            }))
-            .filter(
-              (row: FilteredRow) =>
-                row['交易时间'] !== undefined &&
-                row['交易对方'] !== undefined &&
-                row['商品'] !== undefined &&
-                row['金额元'] !== undefined &&
-                row['当前状态'] !== undefined
-            );
+          const filteredData = filterAndTransformSheetData(sheetData);
 
           console.log(filteredData, 'filteredData');
 
@@ -97,7 +77,7 @@ const ExcelUploader = () => {
             <tbody>
               {rows.map((row, index) => (
                 <tr key={index}>
-                  <td>{row.交易时间}</td>
+                  <td className={Styles.statusColumn}>{row.交易时间}</td>
                   <td>{row.交易对方}</td>
                   <td>{row.商品}</td>
                   <td>{row.金额元}</td>
