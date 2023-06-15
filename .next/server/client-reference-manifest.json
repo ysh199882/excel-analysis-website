@@ -222,6 +222,26 @@
         "async": false
       }
     },
+    "(app-client)/./src/app/components/Auth/Auth.tsx": {
+      "*": {
+        "id": "(sc_client)/./src/app/components/Auth/Auth.tsx",
+        "name": "*",
+        "chunks": [],
+        "async": false
+      },
+      "": {
+        "id": "(sc_client)/./src/app/components/Auth/Auth.tsx",
+        "name": "",
+        "chunks": [],
+        "async": false
+      },
+      "default": {
+        "id": "(sc_client)/./src/app/components/Auth/Auth.tsx",
+        "name": "default",
+        "chunks": [],
+        "async": false
+      }
+    },
     "(app-client)/./src/app/page.tsx": {
       "*": {
         "id": "(sc_client)/./src/app/page.tsx",
@@ -1038,6 +1058,30 @@
     "/Users/yangshihao/Documents/GitHub/excel-analysis-website/node_modules/next/dist/esm/shared/lib/head.js#defaultHead": {
       "id": "(app-client)/./node_modules/next/dist/shared/lib/head.js",
       "name": "defaultHead",
+      "chunks": [
+        "app/page:static/chunks/app/page.js"
+      ],
+      "async": false
+    },
+    "/Users/yangshihao/Documents/GitHub/excel-analysis-website/src/app/components/Auth/Auth.tsx": {
+      "id": "(app-client)/./src/app/components/Auth/Auth.tsx",
+      "name": "*",
+      "chunks": [
+        "app/page:static/chunks/app/page.js"
+      ],
+      "async": false
+    },
+    "/Users/yangshihao/Documents/GitHub/excel-analysis-website/src/app/components/Auth/Auth.tsx#": {
+      "id": "(app-client)/./src/app/components/Auth/Auth.tsx",
+      "name": "",
+      "chunks": [
+        "app/page:static/chunks/app/page.js"
+      ],
+      "async": false
+    },
+    "/Users/yangshihao/Documents/GitHub/excel-analysis-website/src/app/components/Auth/Auth.tsx#default": {
+      "id": "(app-client)/./src/app/components/Auth/Auth.tsx",
+      "name": "default",
       "chunks": [
         "app/page:static/chunks/app/page.js"
       ],
