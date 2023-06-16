@@ -30,6 +30,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     }
   );
 
+  console.log(response, 'response');
+
   if (!response.ok) {
     return res.status(500).json({ error: 'Error calling OpenAI API' });
   }
