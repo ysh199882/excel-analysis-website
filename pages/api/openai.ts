@@ -1,4 +1,4 @@
-import { OpenAIStream, OpenAIStreamPayload } from '../../../utils/OpenAIStream';
+import { OpenAIStream, OpenAIStreamPayload } from '../../utils/OpenAIStream';
 
 // if (process.env.NEXT_PUBLIC_USE_USER_KEY !== 'true') {
 //   if (!process.env.OPENAI_API_KEY) {

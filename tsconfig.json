@@ -18,9 +18,9 @@
       "@/components/*": ["components/*"],
       "@/utils/*": ["utils/*"],
       "@/styles/*": ["styles/*"],
-      "@/images/*": ["public/images/*"],
+      "@/helpers/*": ["helpers/*"],
       "@/data/*": ["data/*"],
-      "@/services/*": ["services/*"],
+      "@/store/*": ["store/*"],
       "@/lib/*": ["lib/*"]
     },
     "incremental": true

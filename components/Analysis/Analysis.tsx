@@ -6,13 +6,13 @@ export default function Analysis() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('/pages/api/openai', {
+      const response = await fetch('/api/openai', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          prompt: dataStore.sheetData,
+          prompt: dataStore.sheetData[10],
           api_key: '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',
         }),
       });
