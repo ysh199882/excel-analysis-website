@@ -12,8 +12,7 @@ export default function Analysis() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          prompt: dataStore.sheetData[10],
-          api_key: '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',
+          prompt: dataStore.sheetData[0],
         }),
       });
 

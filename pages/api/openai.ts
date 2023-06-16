@@ -6,12 +6,24 @@ import { OpenAIStream, OpenAIStreamPayload } from '../../utils/OpenAIStream';
 //   }
 // }
 
+export const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers':
+    'authorization, x-client-info, apikey, content-type',
+};
+
 const handler = async (req: Request): Promise<Response> => {
+  // Handle CORS
+  if (req.method === 'OPTIONS') {
+    console.log('req.method ', req.method);
+    return new Response('ok', { headers: corsHeaders });
+  }
+
   var { prompt, api_key } = (await req.json()) as {
     prompt?: string;
     api_key?: string;
   };
-  //todo make this variable into messages
+
   var p = '请帮我分析账单支出，并给出消费建议:';
   prompt = p + prompt;
   if (!prompt) {

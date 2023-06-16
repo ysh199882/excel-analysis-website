@@ -31,8 +31,7 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
     // 👇️ 获取 min（含）和 max（含）之间的数字
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-  // var keys = process.env.OPENAI_API_KEY || '';
-  var keys = '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' || '';
+  var keys = process.env.OPENAI_API_KEY || '';
 
   const apikeys = keys?.split(',');
   const randomNumber = randomNumberInRange(0, apikeys.length - 1);
@@ -61,7 +60,8 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
   const res = await fetch('https://api.openai.com/v1/chat/completions', {
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${openai_api_key ?? ''}`,
+      // Authorization: `Bearer ${openai_api_key ?? ''}`,
+      Authorization: `Bearer ${keys ?? ''}`,
     },
     method: 'POST',
     body: JSON.stringify(payload),
