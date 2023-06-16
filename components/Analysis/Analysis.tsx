@@ -1,3 +1,4 @@
+// Analysis.js
 import { useState, useEffect } from 'react';
 import { dataStore } from '@/store/sheetData';
 
@@ -12,7 +13,12 @@ export default function Analysis() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          prompt: JSON.stringify(dataStore.sheetData[0]),
+          messages: [
+            {
+              role: 'user',
+              content: JSON.stringify(dataStore.sheetData[0]),
+            },
+          ],
         }),
       });
 
