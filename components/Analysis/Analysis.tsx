@@ -15,8 +15,14 @@ export default function Analysis() {
         body: JSON.stringify({
           messages: [
             {
+              role: 'system',
+              content:
+                '你是一位有帮助的助手，专门分析财务数据并提供深入的信息。',
+            },
+            {
               role: 'user',
-              content: JSON.stringify(dataStore.sheetData[0]),
+              content:
+                'Here is my financial data for the past month: {Your data here}. Could you please analyze it and provide me some insights?',
             },
           ],
         }),
