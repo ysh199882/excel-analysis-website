@@ -1,4 +1,3 @@
-// pages/api/openai.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -15,27 +14,30 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       .json({ error: 'OpenAI API key not found in environment variables' });
   }
 
-  const response = await fetch(
-    'https://api.openai.com/v1/engines/davinci-codex/completions',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        prompt,
-        max_tokens: 100,
-      }),
+  try {
+    const response = await fetch(
+      'https://api.openai.com/v1/engines/davinci-codex/completions',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          prompt,
+          max_tokens: 100,
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      return res.status(500).json({ error: 'Error calling OpenAI API' });
     }
-  );
 
-  console.log(response, 'response');
-
-  if (!response.ok) {
-    return res.status(500).json({ error: 'Error calling OpenAI API' });
+    const data = await response.json();
+    return res.status(200).json(data);
+  } catch (error: any) {
+    console.error(error, 'error');
+    return res.status(500).json({ error: error.message });
   }
-
-  const data = await response.json();
-  return res.status(200).json(data);
 };
