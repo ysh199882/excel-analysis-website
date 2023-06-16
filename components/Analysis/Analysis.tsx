@@ -12,7 +12,7 @@ export default function Analysis() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          prompt: dataStore.sheetData[0],
+          prompt: JSON.stringify(dataStore.sheetData[0]),
         }),
       });
 
@@ -27,5 +27,7 @@ export default function Analysis() {
     fetchData();
   }, []);
 
-  return <div>{analysis}</div>;
+  return (
+    <div>{analysis ? JSON.stringify(analysis, null, 2) : 'Loading...'}</div>
+  );
 }
