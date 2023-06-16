@@ -24,6 +24,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       },
       body: JSON.stringify({
         prompt,
+        model: 'gpt-3.5-turbo',
         max_tokens: 100,
       }),
     });
