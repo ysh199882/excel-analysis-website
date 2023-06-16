@@ -16,20 +16,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   try {
-    const response = await fetch(
-      'https://api.openai.com/v1/engines/davinci-codex/completions',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          prompt,
-          max_tokens: 100,
-        }),
-      }
-    );
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        prompt,
+        max_tokens: 100,
+      }),
+    });
 
     if (!response.ok) {
       // Log the response from OpenAI API for debugging
