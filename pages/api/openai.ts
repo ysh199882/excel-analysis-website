@@ -1,3 +1,4 @@
+// pages/api/openai.ts
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -31,13 +32,20 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     );
 
     if (!response.ok) {
-      return res.status(500).json({ error: 'Error calling OpenAI API' });
+      // Log the response from OpenAI API for debugging
+      console.error('OpenAI API response:', response);
+      const openAIData = await response.json();
+      console.error('OpenAI API data:', openAIData);
+      return res
+        .status(500)
+        .json({ error: 'Error calling OpenAI API', openAIData });
     }
 
     const data = await response.json();
     return res.status(200).json(data);
   } catch (error: any) {
-    console.error(error, 'error');
-    return res.status(500).json({ error: error.message });
+    const err = error as Error;
+    console.error(err);
+    return res.status(500).json({ error: err.message });
   }
 };
