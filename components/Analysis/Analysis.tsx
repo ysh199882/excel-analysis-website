@@ -24,7 +24,7 @@ export default function Analysis() {
             {
               role: 'user',
               content: `这是我上个月的财务数据：${JSON.stringify(
-                dataStore.sheetData.slice(0, 10)
+                dataStore.sheetData
               )}。请分析并提供一些见解：`,
             },
           ],
