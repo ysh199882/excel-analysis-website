@@ -1,7 +1,7 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import React, { useCallback, useRef, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import * as XLSX from 'xlsx';
-import { ExcelRow, ExcelUploaderProps } from './interface';
+import { ExcelUploaderProps } from './interface';
 import Styles from './index.module.scss';
 import filterAndTransformSheetData from '@/helpers/filterAndTransformSheetData';
 import { observer } from 'mobx-react';

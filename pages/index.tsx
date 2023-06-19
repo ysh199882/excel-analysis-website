@@ -27,7 +27,7 @@ function Home() {
       <div className={styles.center}>{/* <div>微信账单GPT分析</div> */}</div>
       <ExcelUploader reset={isReset} onReset={() => setIsReset(false)} />
 
-      {dataStore.sheetData.length && (
+      {dataStore.sheetData.length !== 0 && (
         <div className={styles.buttons}>
           <button className={styles.resetBtn} onClick={resetData}>
             重新上传
