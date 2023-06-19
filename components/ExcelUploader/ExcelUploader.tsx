@@ -1,14 +1,23 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import * as XLSX from 'xlsx';
-import { ExcelRow } from './interface';
+import { ExcelRow, ExcelUploaderProps } from './interface';
 import Styles from './index.module.scss';
 import filterAndTransformSheetData from '@/helpers/filterAndTransformSheetData';
-import Analysis from '../Analysis';
+import { observer } from 'mobx-react';
+import { dataStore } from '@/store/sheetData';
 
-const ExcelUploader = () => {
-  const [rows, setRows] = useState<ExcelRow[]>([]);
-  const [AnalysisBtn, setAnalysisBtn] = useState(false);
+const ExcelUploader = ({ reset, onReset }: ExcelUploaderProps) => {
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (reset) {
+      if (fileInputRef.current instanceof HTMLInputElement) {
+        fileInputRef.current.value = '';
+      }
+      onReset();
+    }
+  }, [reset, onReset]);
 
   const onDrop = useCallback((acceptedFiles: any[]) => {
     acceptedFiles.forEach((file) => {
@@ -27,9 +36,7 @@ const ExcelUploader = () => {
               range: 17, // 从第16行开始读取
             }
           );
-          const filteredData = filterAndTransformSheetData(sheetData);
-          setAnalysisBtn(true);
-          setRows(filteredData as ExcelRow[]);
+          filterAndTransformSheetData(sheetData);
         });
       };
       reader.readAsBinaryString(file);
@@ -56,9 +63,9 @@ const ExcelUploader = () => {
         borderColor: isDragActive ? '#888' : '#aaa',
       }}
     >
-      <input {...getInputProps()} />
+      <input {...getInputProps()} ref={fileInputRef} />
 
-      {rows.length === 0 ? (
+      {dataStore.sheetData.length === 0 ? (
         <p>拖拽Excel文件到这里，或点击选择文件</p>
       ) : (
         <div className={Styles.table}>
@@ -73,7 +80,7 @@ const ExcelUploader = () => {
               </tr>
             </thead>
             <tbody>
-              {rows.map((row, index) => (
+              {dataStore.sheetData.map((row, index) => (
                 <tr key={index}>
                   <td className={Styles.statusColumn}>{row.交易时间}</td>
                   <td>{row.交易对方}</td>
@@ -86,10 +93,8 @@ const ExcelUploader = () => {
           </table>
         </div>
       )}
-
-      {AnalysisBtn && <Analysis></Analysis>}
     </div>
   );
 };
 
-export default ExcelUploader;
+export default observer(ExcelUploader);

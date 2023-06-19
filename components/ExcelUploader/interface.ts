@@ -21,3 +21,9 @@ export interface ExcelRow {
   商户单号: string;
   备注: string;
 }
+
+/**上传组件属性 */
+export interface ExcelUploaderProps {
+  reset: boolean;
+  onReset: () => void;
+}
