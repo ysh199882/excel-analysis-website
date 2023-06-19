@@ -23,9 +23,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages,
-        max_tokens: 100,
+        model: 'gpt-3.5-turbo-0301',
+        messages: messages,
+        temperature: 0,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+        max_tokens: 2000,
+        stream: true,
+        n: 1,
       }),
     });
 
