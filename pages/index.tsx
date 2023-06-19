@@ -20,8 +20,8 @@ function Home() {
         /> */}
         <div>微信账单GPT分析</div>
       </div>
-
-      {isLogin() ? <ExcelUploader /> : <Login />}
+      <ExcelUploader />
+      {/* {isLogin() ? <ExcelUploader /> : <Login />} */}
     </main>
   );
 }
